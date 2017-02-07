@@ -1,9 +1,13 @@
-# k-lunch
-k-lunch Project 
+<h1 align="center">K-lunch</h1>
+A node.js module for serving lunch-menu.
+<div>
+<a href="https://badge.fury.io/js/k-lunch"><img src="https://badge.fury.io/js/k-lunch.svg" alt="npm version" height="18"></a>
+</div>
 
 ## Table of contents
 
 - [Example](#example)
+- [Installation](#installation)
 - [Form](#form)
 - [Method](#method)
 
@@ -43,6 +47,11 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+```
+
+## Installation
+```
+npm install k-lunch
 ```
 
 ## Form
