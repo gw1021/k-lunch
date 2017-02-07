@@ -18,7 +18,7 @@ A node.js module for serving lunch-menu.
 ## Example
 ```js
 let express = require('express');
-let klunch = require('klunch');
+let klunch = require('k-lunch');
 
 let router = express.Router();
 
