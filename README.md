@@ -25,12 +25,12 @@ npm install k-lunch
 const klunch = require('k-lunch');
 
 const form = {
-  year: '2017',
-  month: '02',
-  day: '07',
+  year: 2017,
+  month: 2,
+  day: 7,
   time: 2, // Breakfast = 1, Lunch = 2, Dinner = 3
-  name: schoolName,
-  code: schoolCode,
+  name: '서정고등학교',
+  code: 'J100005797',
   phase: 4 // Elementary School = 2, Middle School = 3, High School = 4
 }
 
@@ -42,15 +42,15 @@ klunch.getLunch(form, (err, output) => {
 
 ## Form
 
-#### Examples
+#### Example
 ```js
 const form = {
-  year: '2017',
-  month: '02',
-  day: '07',
+  year: 2017,
+  month: 2,
+  day: 7,
   time: 2, // Breakfast = 1, Lunch = 2, Dinner = 3
-  name: schoolName,
-  code: schoolCode,
+  name: "yourSchoolName",
+  code: "yourSchoolCode", // Please check out http://www.neis.go.kr/2013susi_CodeList.xls
   phase: 4 // Elementary School = 2, Middle School = 3, High School = 4
 }
 ```
