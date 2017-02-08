@@ -29,7 +29,7 @@ const form = {
   month: 2,
   day: 7,
   time: 2, // Breakfast = 1, Lunch = 2, Dinner = 3
-  name: '서정고등학교',
+  name: '',
   code: 'J100005797',
   phase: 4 // Elementary School = 2, Middle School = 3, High School = 4
 }
