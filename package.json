@@ -1,0 +1,23 @@
+{
+  "name": "k-lunch",
+  "version": "0.0.2",
+  "description": "node.js korean lunch service module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saxman6989/k-lunch.git"
+  },
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "request": "^2.69.0"
+  },
+  "author": "saxman6989",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saxman6989/k-lunch/issues"
+  },
+  "homepage": "https://github.com/saxman6989/k-lunch#readme"
+}
