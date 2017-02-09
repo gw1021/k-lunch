@@ -1,7 +1,7 @@
 {
   "name": "k-lunch",
-  "version": "0.0.2",
-  "description": "node.js korean lunch service module",
+  "version": "0.0.4",
+  "description": "Korean school lunch service module for Node.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "cheerio": "^0.20.0",
-    "request": "^2.69.0"
+    "request": "^2.69.0",
+    "xlsx": "^0.8.2"
   },
   "author": "saxman6989",
   "license": "ISC",

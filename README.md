@@ -22,7 +22,7 @@ npm install k-lunch
 
 ## Example
 ```js
-const klunch = require('k-lunch');
+const klunch = require('k-lunch')
 
 const form = {
   year: 2017,
@@ -30,19 +30,20 @@ const form = {
   day: 7,
   time: 2, // Breakfast = 1, Lunch = 2, Dinner = 3
   name: '서정고등학교',
-  code: 'J100005797',
   phase: 4 // Elementary School = 2, Middle School = 3, High School = 4
 }
 
+const options = {autoCode: true}
+
 klunch.getLunch(form, (err, output) => {
-  if(err) throw err;
-  console.log(output);
-}
+  if(err) throw err
+  console.log(output)
+}, options)
 ```
 
 ## Form
 
-#### Example
+#### Structure
 ```js
 const form = {
   year: 2017,
@@ -60,5 +61,9 @@ const form = {
 #### .getLunch
 
 ```js
-klunch.getLunch(form, callback);
+klunch.getLunch(form, callback, options)
 ```
+
+## Options
+
+- `autoCode: boolean` - Automatically gets school code and replaces form.code with it.

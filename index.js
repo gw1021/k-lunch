@@ -1,5 +1,6 @@
-const cheerio = require('cheerio');
-const request = require('request');
+const cheerio = require('cheerio')
+const request = require('request')
+const codefinder = require('./excel/codefinder')
 
 const max_date = (year, month) => {
   switch(month){
@@ -10,35 +11,44 @@ const max_date = (year, month) => {
     case 8:
     case 10:
     case 12:
-      return 31;
-      break;
+      return 31
+      break
     case 4:
     case 6:
     case 9:
     case 11:
-      return 30;
-      break;
+      return 30
+      break
     case 2:
       if(year % 4 === 0){
-        return 29;
+        return 29
       }
       else{
-        return 28;
+        return 28
       }
-      break;
+      break
     default:
-      return 30;
-      break;
+      return 30
+      break
   }
 }
 
-const pad = d => (d < 10) ? '0' + d.toString() : d.toString();
+const pad = d => (d < 10) ? '0' + d.toString() : d.toString()
 
-const URL = 'http://stu.goe.go.kr/sts_sci_md01_001.do';
+const URL = 'http://stu.goe.go.kr/sts_sci_md01_001.do'
 
-module.exports.getLunch = function(form, callback) {
-  const ymdArr = [form.year, form.month, form.day];
-  const ymd = ymdArr.map(v => pad(v)).join('');
+module.exports.getLunch = function(form, callback, options) {
+  const ymdArr = [form.year, form.month, form.day]
+  const ymd = ymdArr.map(v => pad(v)).join('')
+
+  if(options) {
+    if(options.autoCode === true) {
+      const schoolName = form.name
+      const schoolCode = codefinder.getCode(schoolName)
+      form.code = schoolCode
+    }
+  }
+
   const reqForm = {
     "schYmd": ymd,
     "schMmealScCode": form.time,
@@ -54,18 +64,18 @@ module.exports.getLunch = function(form, callback) {
     form: reqForm
   }, function(err, res_post, body){
     if(err) {
-      callback(err, null);
+      callback(err, null)
     } else {
-      const $ = cheerio.load(body, {decodeEntities: false});
-      const mixedDate = ymdArr.map(v => pad(v)).join('.');
+      const $ = cheerio.load(body, {decodeEntities: false})
+      const mixedDate = ymdArr.map(v => pad(v)).join('.')
 
-      let index = 0;
-      let data = '';
-      let dataArr = [];
-      let output = [];
+      let index = 0
+      let data = ''
+      let dataArr = []
+      let output = []
 
       $('table > thead > tr').each(function() {
-        let rows = $(this).find('th');
+        let rows = $(this).find('th')
         
         for(let i = 1; i < 8; i++) {
           let rowText = rows.eq(i).text();
@@ -74,16 +84,16 @@ module.exports.getLunch = function(form, callback) {
       });
 
       $('table > tbody').each(function() {
-        let lunchTr = $(this).find('tr').eq(1);
-        let lunchInfo = lunchTr.find('td').eq(index - 1).html();
+        let lunchTr = $(this).find('tr').eq(1)
+        let lunchInfo = lunchTr.find('td').eq(index - 1).html()
         data = lunchInfo;
       });
 
       if(data === null || $('table > thead > tr > td').text() === '자료가 없습니다.') {
-        callback("There's no data in table.", null);
+        callback("There's no data in table.", null)
       } else {
-        dataArr = data.split('<br>');
-        dataArr.pop();
+        dataArr = data.split('<br>')
+        dataArr.pop()
 
         dataArr.forEach(e => {
           let intIndex = e.search(/\d/); //finds first int and returns index of it.
@@ -91,15 +101,15 @@ module.exports.getLunch = function(form, callback) {
             menus: '',
             nuts: ''
           }
-          dataScheme.menus = e.substring(0, intIndex);
-          dataScheme.nuts = e.substring(intIndex, e.length - 1).split('.');
-          output.push(dataScheme);
+          dataScheme.menus = e.substring(0, intIndex)
+          dataScheme.nuts = e.substring(intIndex, e.length - 1).split('.')
+          output.push(dataScheme)
         });
 
         if(output[0] == null) {
-          callback("There's no data in table.", null);
+          callback("There's no data in table.", null)
         } else {
-          callback(null, output);
+          callback(null, output)
         }        
       }
     }
