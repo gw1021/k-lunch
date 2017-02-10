@@ -1,7 +1,7 @@
-<h1 align="center">K-lunch</h1>
+﻿<h1 align="center">K-lunch</h1>
 A node.js module for serving lunch-menu.
 <div>
-<a href="https://badge.fury.io/js/k-lunch"><img src="https://badge.fury.io/js/k-lunch.svg" alt="npm version" height="18"></a>
+<a href="https://www.npmjs.com/package/k-lunch"><img src="https://badge.fury.io/js/k-lunch.svg" alt="npm version" height="18"></a>
 </div>
 
 ## Table of contents
