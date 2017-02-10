@@ -20,6 +20,13 @@ A node.js module for serving lunch-menu.
 npm install k-lunch
 ```
 
+## Testing
+You can edit test.js for testing.
+
+```
+npm test
+```
+
 ## Example
 ```js
 const klunch = require('k-lunch')
@@ -33,7 +40,10 @@ const form = {
   phase: 4 // Elementary School = 2, Middle School = 3, High School = 4
 }
 
-const options = {autoCode: true}
+const options = {
+  autoCode: true,
+  autoDomain: true
+}
 
 klunch.getLunch(form, (err, output) => {
   if(err) throw err
@@ -52,6 +62,7 @@ const form = {
   time: 2, // Breakfast = 1, Lunch = 2, Dinner = 3
   name: "yourSchoolName",
   code: "yourSchoolCode", // Please check out http://www.neis.go.kr/2013susi_CodeList.xls
+  domain: "yourDomainCode",
   phase: 4 // Elementary School = 2, Middle School = 3, High School = 4
 }
 ```
@@ -67,3 +78,4 @@ klunch.getLunch(form, callback, options)
 ## Options
 
 - `autoCode: boolean` - Automatically gets school code and replaces form.code with it.
+- `autoDomain: boolean` - Automatically gets domain code and replaces form.domain with it.
