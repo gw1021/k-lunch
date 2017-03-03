@@ -4,62 +4,6 @@ const codefinder = require('./excel/codefinder')
 
 const pad = d => (d < 10) ? '0' + d.toString() : d.toString()
 
-const getDomainCode = (domain) => {
-  switch(domain) {
-    case '서울특별시':
-      return 'sen'
-      break
-    case '부산광역시':
-      return 'pen'
-      break
-    case '대구광역시':
-      return 'dge'
-      break
-    case '인천광역시':
-      return 'ice'
-      break
-    case '광주광역시':
-      return 'gen'
-      break
-    case '대전광역시':
-      return 'dge'
-      break
-    case '울산광역시':
-      return 'use'
-      break
-    case '세종특별자치시':
-      return 'sje'
-      break
-    case '경기도':
-      return 'goe'
-      break
-    case '강원도':
-      return 'kwe'
-      break
-    case '충청북도':
-      return 'cbe'
-      break
-    case '충청남도':
-      return 'cne'
-      break
-    case '전라북도':
-      return 'jbe'
-      break
-    case '전라남도':
-      return 'jne'
-      break
-    case '경상북도':
-      return 'gbe'
-      break
-    case '경상남도':
-      return 'gne'
-      break
-    case '제주특별자치도':
-      return 'jje'
-      break
-  }
-}
-
 module.exports.getLunch = (form, callback, options) => {
   const ymdArr = [form.year, form.month, form.day]
   const ymd = ymdArr.map(v => pad(v)).join('')
@@ -74,7 +18,7 @@ module.exports.getLunch = (form, callback, options) => {
 
     if(options.autoDomain === true) {
       const domain = codefinder.getDomain(schoolName)
-      form.domain = getDomainCode(domain)
+      form.domain = domain
     }
   }
 
@@ -132,8 +76,14 @@ module.exports.getLunch = (form, callback, options) => {
             menu: '',
             allergyInfo: ''
           }
-          dataSchema.menu = e.substring(0, intIndex)
-          dataSchema.allergyInfo = e.substring(intIndex, e.length - 1).split('.')
+
+          if(intIndex === -1) {
+            dataSchema.menu = e
+          } else {
+            dataSchema.menu = e.substring(0, intIndex)
+            dataSchema.allergyInfo = e.substring(intIndex, e.length - 1).split('.')
+          }
+          
           output.push(dataSchema)
         });
 
